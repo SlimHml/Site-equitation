@@ -6,6 +6,7 @@ import logger from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
 import multer from "multer";
+const apiRouter = require("./apiRouter").router;
 require("dotenv-extended").load();
 
 import indexRouter from "./routes/index";
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use("/api/", apiRouter);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
