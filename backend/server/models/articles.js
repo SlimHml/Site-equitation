@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
   );
   Articles.associate = function(models) {
     // associations can be defined here
+    Articles.belongsTo(models.Users, {
+      foreignKey: "Articles",
+      onDelete: "CASCADE"
+    });
   };
   return Articles;
 };
