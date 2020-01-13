@@ -4,6 +4,7 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
+import multer from "multer";
 require("dotenv-extended").load();
 
 import indexRouter from "./routes/index";
