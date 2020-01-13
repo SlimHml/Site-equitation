@@ -1,19 +1,19 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Articles = sequelize.define(
-    "Articles",
+  const Article = sequelize.define(
+    "Article",
     {
       title: { type: DataTypes.STRING, allowNull: false },
       content: { type: DataTypes.STRING, allowNull: false }
     },
     {}
   );
-  Articles.associate = function(models) {
+  Article.associate = function(models) {
     // associations can be defined here
-    Articles.belongsTo(models.Users, {
-      foreignKey: "Articles",
+    Article.belongsTo(models.User, {
+      foreignKey: "Article",
       onDelete: "CASCADE"
     });
   };
-  return Articles;
+  return Article;
 };
