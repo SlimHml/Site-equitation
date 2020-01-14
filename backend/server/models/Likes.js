@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Likes.belongsToMany(models.Articles, {
       through: models.Likes,
-      foreignKey: "articleId",
+      foreignKey: "userId",
       otherKey: "articleId"
     });
     Likes.belongsToMany(models.Users, {
