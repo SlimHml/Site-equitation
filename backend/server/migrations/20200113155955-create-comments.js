@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("comments", {
+    return queryInterface.createTable("Comments", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -16,7 +16,13 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       articleId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        references: {
+          model: "Articles",
+          key: "id",
+          as: "articleId"
+        }
       },
       createdAt: {
         allowNull: false,
