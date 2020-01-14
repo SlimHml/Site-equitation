@@ -12,7 +12,7 @@ module.exports = {
     const password = req.body.password;
 
     if (username === null || email === null || password === null) {
-      return res.status(400).json({ erreur: "il manque des paramètres !" });
+      return res.status(400).json({ error: "il manque des paramètres !" });
     }
     Users.findOne({
       attributes: ["email"],
@@ -37,6 +37,8 @@ module.exports = {
               .status(500)
               .json({ error: "Impossible de vérifier l'utilisateur" });
           });
+      } else {
+        return res.status(409).json({ error: "L'utilisateur existe déjà" });
       }
     });
   },
