@@ -1,11 +1,19 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const categories = sequelize.define('categories', {
-    content: DataTypes.STRING,
-    articleId: DataTypes.INTEGER
-  }, {});
-  categories.associate = function(models) {
+  const categories = sequelize.define(
+    "Categories",
+    {
+      content: DataTypes.STRING,
+      articleId: DataTypes.INTEGER
+    },
+    {}
+  );
+  Categories.associate = function(models) {
     // associations can be defined here
+    Categories.belongsTo(models.Articles, {
+      foreignKey: "articleId",
+      onDelete: "CASCADE"
+    });
   };
-  return categories;
+  return Categories;
 };

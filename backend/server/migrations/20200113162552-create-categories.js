@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       content: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       articleId: {
         type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
         references: {
           model: "Articles",
           key: "id",
