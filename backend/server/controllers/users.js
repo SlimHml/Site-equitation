@@ -1,6 +1,6 @@
 // Imports
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const jwtUtils = require("../utils/jwt.utils");
 const Users = require("../models").Users;
 
 //Routes
@@ -63,8 +63,8 @@ module.exports = {
           ) {
             if (resBycrypt) {
               return res.status(200).json({
-                userId: newUser.id,
-                token: "THE TOKEN"
+                userId: userFound.id,
+                token: jwtUtils.generateTokenForUser(userFound)
               });
             } else {
               return res.status(403).json({ error: "mot de passe invalide" });
