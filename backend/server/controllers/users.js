@@ -1,8 +1,11 @@
-// Imports
+// Constantes
+
 const bcrypt = require("bcrypt");
 const jwtUtils = require("../utils/jwt.utils");
 const Users = require("../models").Users;
 
+const Email_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const Password_REGEX = /^(?=.*\d).{4,8}$/;
 //Routes
 module.exports = {
   register: function(req, res) {
@@ -13,6 +16,14 @@ module.exports = {
 
     if (username === null || email === null || password === null) {
       return res.status(400).json({ error: "Des paramêtres sont manquants !" });
+    }
+    if (username.length >= 13 || username.length <= 2) {
+      return res.status(400).json({
+        error:
+          "Le nom d'utilisateur doit comporter minimum 3 lettres et maximum 12 lettres"
+      });
+    }
+    if (!Email_REGEX.test(email)) {
     }
     Users.findOne({
       attributes: ["email"],
