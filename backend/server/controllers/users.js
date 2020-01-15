@@ -42,7 +42,7 @@ module.exports = {
       }
     });
   },
-  login: (req, res) => {
+  login: function(req, res) {
     // Params
     const email = req.body.email;
     const password = req.body.password;
@@ -51,7 +51,6 @@ module.exports = {
       return res.status(400).json({ error: "Des paramètres sont manquants !" });
     }
     Users.findOne({
-      attributes: ["email"],
       where: { email }
     })
       .then(function(userFound) {
@@ -67,11 +66,11 @@ module.exports = {
                 token: jwtUtils.generateTokenForUser(userFound)
               });
             } else {
-              return res.status(403).json({ error: "mot de passe invalide" });
+              return res.status(404).json({ error: "mot de passe invalide" });
             }
           });
         } else {
-          return res.status(404).json({ error: "L'utilisateur n'existe pas" });
+          return res.status(404).json({ error: "Cet email n'est pas valide" });
         }
       })
       .catch(function(err) {

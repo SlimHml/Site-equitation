@@ -11,4 +11,5 @@ module.exports = function(router) {
     })
   );
   router.post("/api/users/register", usersController.register);
+  router.post("/api/users/login", usersController.login);
 };
