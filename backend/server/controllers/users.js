@@ -56,9 +56,29 @@ module.exports = {
     })
       .then(function(userFound) {
         // à faire
+        if (userFound) {
+          bcrypt.compare(password, userFound.password, function(
+            errBycrypt,
+            resBycrypt
+          ) {
+            if (resBycrypt) {
+              return res.status(200).json({
+                userId: newUser.id,
+                token: "THE TOKEN"
+              });
+            } else {
+              return res.status(403).json({ error: "mot de passe invalide" });
+            }
+          });
+        } else {
+          return res.status(404).json({ error: "L'utilisateur n'existe pas" });
+        }
       })
       .catch(function(err) {
         // à faire
+        return res
+          .status(500)
+          .json({ error: "Impossible de vérifier l'utilisateur" });
       });
   }
 };
