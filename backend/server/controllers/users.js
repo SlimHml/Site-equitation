@@ -1,7 +1,7 @@
 // Imports
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Users = require("../models").Users;
+const Users = require("../models/Users");
 
 //Routes
 module.exports = {
