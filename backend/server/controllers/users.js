@@ -1,11 +1,11 @@
 // Imports
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Users = require("../models/Users");
+const Users = require("../models").Users;
 
 //Routes
 module.exports = {
-  register: (req, res) => {
+  register: function(req, res) {
     // Params
     const username = req.body.username;
     const email = req.body.email;
@@ -17,7 +17,7 @@ module.exports = {
 
     Users.findOne({
       attributes: ["email"],
-      where: { email }
+      where: { email: email }
     }).then(function(userFound) {
       if (!userFound) {
         bcrypt.hash(password, 5, function(err, bcryptedPassword) {

@@ -1,4 +1,6 @@
-require("dotenv-extended").load();
+// require("dotenv-extended").load();
+
+// Pour /server/config.js: require("dotenv").config();
 
 import express from "express";
 import logger from "morgan";
