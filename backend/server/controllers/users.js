@@ -3,6 +3,7 @@
 const bcrypt = require("bcrypt");
 const jwtUtils = require("../utils/jwt.utils");
 const Users = require("../models").Users;
+const asyncLib = require("async");
 
 // Constantes
 
