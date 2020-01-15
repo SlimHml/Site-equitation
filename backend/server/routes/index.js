@@ -1,9 +1,14 @@
 // Imports
 const express = require("express");
-const userController = require("../controllers/users");
+const usersController = require("../controllers/users");
 
-// Router
+// Routes
 
 module.exports = router => {
-  // Routes
+  router.get("/api", (req, res) =>
+    res.status(200).send({
+      message: "Welcome to the Equitation API!"
+    })
+  );
+  router.post("/api/users/register", usersController.register);
 };
