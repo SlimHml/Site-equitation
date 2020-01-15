@@ -1,12 +1,16 @@
-// Constantes
+// Imports
 
 const bcrypt = require("bcrypt");
 const jwtUtils = require("../utils/jwt.utils");
 const Users = require("../models").Users;
 
+// Constantes
+
 const Email_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const Password_REGEX = /^(?=.*\d).{4,8}$/;
+
 //Routes
+
 module.exports = {
   register: function(req, res) {
     // Params
@@ -24,6 +28,13 @@ module.exports = {
       });
     }
     if (!Email_REGEX.test(email)) {
+      return res.status(400).json({ error: "L'email n'est pas valide" });
+    }
+    if (!Password_REGEX.test(password)) {
+      return res.status(400).json({
+        error:
+          "Le mot de passe doit comprendre entre 4 et 8 caractères dont au moins 1 chiffre"
+      });
     }
     Users.findOne({
       attributes: ["email"],
