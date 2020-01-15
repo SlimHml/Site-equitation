@@ -4,7 +4,7 @@ const usersController = require("../controllers").users;
 
 // Routes
 
-module.exports = router => {
+module.exports = function(router) {
   router.get("/api", (req, res) =>
     res.status(200).send({
       message: "Welcome to the Equitation API!"

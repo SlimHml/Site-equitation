@@ -1,7 +1,7 @@
 // Imports
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Users = require("../models/").Users;
+const Users = require("../models").Users;
 
 //Routes
 module.exports = {
@@ -12,16 +12,15 @@ module.exports = {
     const password = req.body.password;
 
     if (username === null || email === null || password === null) {
-      return res.status(400).json({ error: "il manque des paramètres !" });
+      return res.status(400).json({ error: "Des paramêtres sont manquants !" });
     }
-
     Users.findOne({
       attributes: ["email"],
-      where: { email: email }
+      where: { email }
     }).then(function(userFound) {
       if (!userFound) {
         bcrypt.hash(password, 5, function(err, bcryptedPassword) {
-          const newUser = Users.create({
+          let newUser = Users.create({
             username,
             email,
             password: bcryptedPassword,
@@ -39,11 +38,27 @@ module.exports = {
             });
         });
       } else {
-        return res.status(409).json({ error: "L'utilisateur existe déjà" });
+        return res.status(400).json({ error: "L'utilisateur existe déjà" });
       }
     });
   },
   login: (req, res) => {
-    // à faire
+    // Params
+    const email = req.body.email;
+    const password = req.body.password;
+
+    if (email === null || password === null) {
+      return res.status(400).json({ error: "Des paramètres sont manquants !" });
+    }
+    Users.findOne({
+      attributes: ["email"],
+      where: { email }
+    })
+      .then(function(userFound) {
+        // à faire
+      })
+      .catch(function(err) {
+        // à faire
+      });
   }
 };
