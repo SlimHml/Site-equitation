@@ -102,5 +102,9 @@ module.exports = {
           .status(500)
           .json({ error: "Impossible de vérifier l'utilisateur" });
       });
+    function getUserProfile(req, res) {
+      //Obtenir l'authorisation de l'entête
+      let headerAutho = req.headers["authorization"];
+    }
   }
 };
