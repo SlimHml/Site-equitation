@@ -105,6 +105,23 @@ module.exports = {
     function getUserProfile(req, res) {
       //Obtenir l'authorisation de l'entête
       let headerAutho = req.headers["authorization"];
+      let userId = jwtUtils.getUserId(headerAutho);
+      if (userId < 0) return res.status(400).json({ error: "Token invalide" });
+
+      Users.findOne({
+        attributes: ["id", "username", "email", "password"],
+        where: { id: userId }
+      })
+        .then(function(user) {
+          if (user) {
+            res.status(201).json(user);
+          } else {
+            res.status(404).json({ error: "Utilisateur non reconnu" });
+          }
+        })
+        .catch(function(err) {
+          res.status(500).json({ error: "Ne peut pas fetch le user" });
+        });
     }
   }
 };
