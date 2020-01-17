@@ -109,7 +109,7 @@ module.exports = {
       if (userId < 0) return res.status(400).json({ error: "Token invalide" });
 
       Users.findOne({
-        attributes: ["id", "username", "email", "password"],
+        attributes: ["id", "username", "email"],
         where: { id: userId }
       })
         .then(function(user) {
