@@ -10,6 +10,9 @@ module.exports = function(router) {
       message: "Welcome to the Equitation API!"
     })
   );
+  // Users Routes
+
   router.post("/api/users/register", usersController.register);
   router.post("/api/users/login", usersController.login);
+  router.get("/api/users/me", usersController.getUserProfile);
 };
