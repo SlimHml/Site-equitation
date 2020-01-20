@@ -102,40 +102,5 @@ module.exports = {
           .status(500)
           .json({ error: "Impossible de vérifier l'utilisateur" });
       });
-    function getUserProfile(req, res) {
-      //Obtenir l'authorisation de l'entête
-      let headerAutho = req.headers["authorization"];
-      let userId = jwtUtils.getUserId(headerAutho);
-
-      const username = req.body.username;
-      const email = req.body.username;
-      if (userId < 0) return res.status(400).json({ error: "Token invalide" });
-
-      Users.findOne({
-        attributes: ["id", "username", "email"],
-        where: { id: userId }
-      }).then(function(userFound) {
-        if (userFound) {
-          userFound
-            .update({
-              username: username ? username : userFound.username,
-              email: email ? email : userFound.email
-            })
-            .then(function() {
-              if (userFound) {
-                res.status(201).json(userFound);
-              } else {
-                res
-                  .status(500)
-                  .json({ error: "Ne peut pas mettre à jour l'utilisateur" });
-              }
-            })
-            .catch(function(err) {
-              res.status(500).json({ error: "Ne peut pas fetch le user" });
-            });
-        }
-        return getUserProfile;
-      });
-    }
   }
 };
