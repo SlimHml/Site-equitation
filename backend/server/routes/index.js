@@ -14,5 +14,5 @@ module.exports = function(router) {
 
   router.post("/api/users/register", usersController.register);
   router.post("/api/users/login", usersController.login);
-  router.get("/api/users/me", usersController.getUserProfile);
+  router.get("/api/users/profile", usersController.getUserProfile);
 };
