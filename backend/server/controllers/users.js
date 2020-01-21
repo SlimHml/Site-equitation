@@ -87,7 +87,7 @@ module.exports = {
             if (resBycrypt) {
               return res.status(200).json({
                 userId: userFound.id,
-                token: jwtUtils.generateTokenForUser(userFound)
+                token: "le token"
               });
             } else {
               return res.status(404).json({ error: "mot de passe invalide" });
