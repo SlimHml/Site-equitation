@@ -19,7 +19,7 @@ module.exports = {
     const email = req.body.email;
     const password = req.body.password;
 
-    if (username === null || email === null || password === null) {
+    if (username == null || email == null || password == null) {
       return res.status(400).json({ error: "Des paramêtres sont manquants !" });
     }
     if (username.length >= 13 || username.length <= 2) {
@@ -61,7 +61,7 @@ module.exports = {
             });
         });
       } else {
-        return res.status(400).json({ error: "L'utilisateur existe déjà" });
+        return res.status(409).json({ error: "L'utilisateur existe déjà" });
       }
     });
   },
