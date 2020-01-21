@@ -94,7 +94,9 @@ module.exports = {
             }
           });
         } else {
-          return res.status(404).json({ error: "Cet email n'est pas valide" });
+          return res
+            .status(404)
+            .json({ error: "Cet utilisateur n'existe pas" });
         }
       })
       .catch(function(err) {
