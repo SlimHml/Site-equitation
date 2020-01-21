@@ -70,7 +70,7 @@ module.exports = {
     const email = req.body.email;
     const password = req.body.password;
 
-    if (email === null || password === null) {
+    if (email == null || password == null) {
       return res.status(400).json({ error: "Des paramètres sont manquants !" });
     }
     Users.findOne({
