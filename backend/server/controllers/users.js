@@ -160,7 +160,7 @@ module.exports = {
           })
           .catch(function (err) {
             res.status(500).json({ error: "Ne peut pas fetch le user" });
-          });
+          })
       }
     })
   },
