@@ -113,7 +113,9 @@ module.exports = {
 
     const username = req.body.username;
     const email = req.body.username;
-    if (userId < 0) return res.status(400).json({ error: "Token invalide" });
+    if (userId < 0) {
+      return res.status(400).json({ error: "Token invalide" });
+    }
 
     Users.findOne({
       attributes: ["id", "username", "email"],
