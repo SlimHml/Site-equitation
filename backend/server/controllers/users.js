@@ -120,29 +120,33 @@ module.exports = {
     Users.findOne({
       attributes: ["id", "username", "email"],
       where: { id: userId }
-    }).then(function(userFound) {
-      if (userFound) {
-        res.status(201).json(userFound);
-      } else {
-        res.status(404).json({ error: "User not found" });
-      }
-      //userFound
-      //  .update({
-      //    username: username ? username : userFound.username,
-      //    email: email ? email : userFound.email
-      //  })
-      //  .then(function() {
-      //    if (userFound) {
-      //      res.status(201).json(userFound);
-      //    } else {
-      //      res
-      //        .status(500)
-      //        .json({ error: "Ne peut pas mettre à jour l'utilisateur" });
-      //    }
-      //  })
-      //  .catch(function(err) {
-      //    res.status(500).json({ error: "Ne peut pas fetch le user" });
-      //  });
-    });
+    })
+      .then(function(user) {
+        if (user) {
+          res.status(201).json(user);
+        } else {
+          res.status(404).json({ error: "User not found" });
+        }
+        //userFound
+        //  .update({
+        //    username: username ? username : userFound.username,
+        //    email: email ? email : userFound.email
+        //  })
+        //  .then(function() {
+        //    if (userFound) {
+        //      res.status(201).json(userFound);
+        //    } else {
+        //      res
+        //        .status(500)
+        //        .json({ error: "Ne peut pas mettre à jour l'utilisateur" });
+        //    }
+        //  })
+        //  .catch(function(err) {
+        //    res.status(500).json({ error: "Ne peut pas fetch le user" });
+        //  });
+      })
+      .catch(function(err) {
+        res.status(500).json({ error: "cannot fetch user" });
+      });
   }
 };
