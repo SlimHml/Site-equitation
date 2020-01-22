@@ -110,8 +110,6 @@ module.exports = {
     let headerAutho = req.headers["authorization"];
     let userId = jwtUtils.getUserId(headerAutho);
 
-    const username = req.body.username;
-    const email = req.body.username;
     if (userId < 0) {
       return res.status(400).json({ error: "Token invalide !" });
     }
@@ -133,12 +131,12 @@ module.exports = {
   },
   updateUserProfile: function (req, res) {
     //Obtenir l'authorisation de l'entête
-    let headerAutho = req.headers["authorization"];
-    let userId = jwtUtils.getUserId(headerAutho);
+    const headerAutho = req.headers["authorization"];
+    const userId = jwtUtils.getUserId(headerAutho);
 
     // Paramètres que l'on souhaite update
-    let username = req.body.username;
-    let email = req.body.email;
+    const username = req.body.username;
+    const email = req.body.email;
 
     Users.findOne({
       attribute: ["id", "username", "email"],
@@ -147,10 +145,10 @@ module.exports = {
       if (userFound) {
         userFound
           .update({
-            username: username ? username : userFound.username,
-            email: email ? email : userFound.email
+            username: (username ? username : userFound.username),
+            email: (email ? email : userFound.email)
           })
-          .then(function () {
+          .then(function (userFound) {
             if (userFound) {
               res.status(201).json(userFound);
             } else {
