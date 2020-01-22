@@ -147,5 +147,18 @@ module.exports = {
       .catch(function (err) {
         res.status(500).json({ error: "cannot fetch user" });
       });
+  },
+  updateUserProfile: function (req, res) {
+    //Obtenir l'authorisation de l'entête
+    let headerAutho = req.headers["authorization"];
+    let userId = jwtUtils.getUserId(headerAutho);
+
+    // Paramètres que l'on souhaite update
+    let username = req.body.username;
+
+    Users.findOne({
+      attribute: ["id", "username", "password"],
+      where: { id: userId }
+    }).then
   }
 };
