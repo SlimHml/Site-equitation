@@ -138,9 +138,10 @@ module.exports = {
 
     // Paramètres que l'on souhaite update
     let username = req.body.username;
+    let email = req.body.email;
 
     Users.findOne({
-      attribute: ["id", "username"],
+      attribute: ["id", "username", "email"],
       where: { id: userId }
     }).then(function (userFound) {
       if (userFound) {
