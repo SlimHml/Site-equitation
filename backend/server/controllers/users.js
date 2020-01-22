@@ -13,7 +13,7 @@ const Password_REGEX = /^(?=.*\d).{4,8}$/;
 //Routes
 
 module.exports = {
-  register: function(req, res) {
+  register: function (req, res) {
     // Params
     const username = req.body.username;
     const email = req.body.email;
@@ -40,21 +40,21 @@ module.exports = {
     Users.findOne({
       attributes: ["email"],
       where: { email }
-    }).then(function(userFound) {
+    }).then(function (userFound) {
       if (!userFound) {
-        bcrypt.hash(password, 5, function(err, bcryptedPassword) {
+        bcrypt.hash(password, 5, function (err, bcryptedPassword) {
           let newUser = Users.create({
             username,
             email,
             password: bcryptedPassword,
             isAdmin: 0
           })
-            .then(function(newUser) {
+            .then(function (newUser) {
               return res.status(201).json({
                 userId: newUser.id
               });
             })
-            .catch(function(err) {
+            .catch(function (err) {
               return res
                 .status(500)
                 .json({ error: "Impossible de vérifier l'utilisateur" });
@@ -65,7 +65,7 @@ module.exports = {
       }
     });
   },
-  login: function(req, res) {
+  login: function (req, res) {
     // Params
     const email = req.body.email;
     const password = req.body.password;
@@ -77,10 +77,10 @@ module.exports = {
     Users.findOne({
       where: { email }
     })
-      .then(function(userFound) {
+      .then(function (userFound) {
         // à faire
         if (userFound) {
-          bcrypt.compare(password, userFound.password, function(
+          bcrypt.compare(password, userFound.password, function (
             errBycrypt,
             resBycrypt
           ) {
@@ -99,14 +99,14 @@ module.exports = {
             .json({ error: "Cet utilisateur n'existe pas" });
         }
       })
-      .catch(function(err) {
+      .catch(function (err) {
         // à faire
         return res
           .status(500)
           .json({ error: "Impossible de vérifier l'utilisateur" });
       });
   },
-  getUserProfile(req, res) {
+  getUserProfile: function (req, res) {
     //Obtenir l'authorisation de l'entête
     let headerAutho = req.headers["authorization"];
     let userId = jwtUtils.getUserId(headerAutho);
@@ -121,7 +121,7 @@ module.exports = {
       attributes: ["id", "username", "email"],
       where: { id: userId }
     })
-      .then(function(user) {
+      .then(function (user) {
         if (user) {
           res.status(201).json(user);
         } else {
@@ -145,7 +145,7 @@ module.exports = {
         //    res.status(500).json({ error: "Ne peut pas fetch le user" });
         //  });
       })
-      .catch(function(err) {
+      .catch(function (err) {
         res.status(500).json({ error: "cannot fetch user" });
       });
   }
