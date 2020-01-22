@@ -3,7 +3,6 @@
 const bcrypt = require("bcrypt");
 const jwtUtils = require("../utils/jwt.utils");
 const Users = require("../models").Users;
-const asyncLib = require("async");
 
 // Constantes
 
@@ -114,7 +113,7 @@ module.exports = {
     const username = req.body.username;
     const email = req.body.username;
     if (userId < 0) {
-      return res.status(400).json({ error: "Token invalide" });
+      return res.status(400).json({ error: "Token invalide !" });
     }
 
     Users.findOne({
