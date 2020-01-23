@@ -14,6 +14,10 @@ module.exports = {
         const content = req.body.content;
         const likes = req.body.likes;
 
+        // Obtenir l'authentification
+        let headerAutho = req.headers["authorization"];
+        let userId = jwtUtils.getUserId(headerAutho);
+
         // Conditions
         if (title.length <= 4) {
             return (res.status(400).json({ error: "Le titre doit comporter au moins 5 lettres" }))
