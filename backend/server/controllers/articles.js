@@ -36,6 +36,7 @@ module.exports = {
         } else {
             (res.status(500).json({ error: "Erreur 500, la page n'existe pas" }))
         }
+        // Afficher l'utilisateur ainsi que le bon attribut sur l'article
         Users.findOne({
             attributes: ["id", "username"],
             where: { id: userId }
@@ -44,11 +45,16 @@ module.exports = {
         }).catch(function (err) {
             return res.status(500).json({ error: "Impossible de vérifier l'utilisateur" })
         })
+        // Création de l'article si l'utilisateur est trouvé
         if (userFound) {
             Articles.create({
                 title: title,
                 content: content,
                 likes: 0,
+            }).then(function (newArticle) {
+
+            }).catch(function (err) {
+                return res.status(500).json({ error: "Utilisateur introuvable" })
             })
         }
     },
