@@ -1,6 +1,7 @@
 // Imports
 
 const bcrypt = require("bcrypt");
+// Ne pas oublier le salage !!!
 const jwtUtils = require("../utils/jwt.utils");
 const Users = require("../models").Users;
 
