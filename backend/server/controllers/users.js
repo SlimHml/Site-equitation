@@ -32,6 +32,7 @@ module.exports = {
           "Le nom d'utilisateur doit comporter minimum 3 lettres et maximum 12 lettres"
       });
     }
+    // Regex conditions Calls
     if (!Email_REGEX.test(email)) {
       return res.status(400).json({ error: "L'email n'est pas valide" });
     }
