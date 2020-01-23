@@ -48,7 +48,7 @@ module.exports = {
     }).then(function (userFound) {
       if (!userFound) {
         bcrypt.hash(password, 5, function (err, bcryptedPassword) {
-          let newUser = Users.create({
+          Users.create({
             username,
             email,
             password: bcryptedPassword,
