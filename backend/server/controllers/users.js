@@ -44,6 +44,7 @@ module.exports = {
       });
     }
     Users.findOne({
+      // Points de comparaisons dans la DB
       attributes: ["email"],
       where: { email: email }
     }).then(function (userFound) {
