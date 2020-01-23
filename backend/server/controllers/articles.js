@@ -37,12 +37,14 @@ module.exports = {
             (res.status(500).json({ error: "Erreur 500, la page n'existe pas" }))
         }
         Users.findOne({
+            attributes: ["id", "username"],
             where: { id: userId }
         }).then(function (userFound) {
             res.status(201).json(userFound)
         }).catch(function (err) {
             return res.status(500).json({ error: "Impossible de vérifier l'utilisateur" })
         })
+        if (userFound) { }
     },
 
     listArticle: function (req, res) {
