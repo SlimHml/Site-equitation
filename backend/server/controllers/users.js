@@ -21,6 +21,8 @@ module.exports = {
     if (username == null || email == null || password == null) {
       return res.status(400).json({ error: "Des paramêtres sont manquants !" });
     }
+
+    // Filtres Username et password
     if (username.length >= 13 || username.length <= 2) {
       return res.status(400).json({
         error:
@@ -38,7 +40,7 @@ module.exports = {
     }
     Users.findOne({
       attributes: ["email"],
-      where: { email }
+      where: { email: email }
     }).then(function (userFound) {
       if (!userFound) {
         bcrypt.hash(password, 5, function (err, bcryptedPassword) {
@@ -139,16 +141,16 @@ module.exports = {
     const email = req.body.email;
 
     Users.findOne({
-      attribute: ["id", "username", "email"],
+      attributes: ["id", "username", "email"],
       where: { id: userId }
     }).then(function (userFound) {
       if (userFound) {
         userFound
           .update({
-            username: (username ? username : userFound.username),
-            email: (email ? email : userFound.email)
+            username: username ? username : userFound.username,
+            email: email ? email : userFound.email
           })
-          .then(function (userFound) {
+          .then(function () {
             if (userFound) {
               res.status(201).json(userFound);
             } else {
