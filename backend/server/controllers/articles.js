@@ -44,7 +44,13 @@ module.exports = {
         }).catch(function (err) {
             return res.status(500).json({ error: "Impossible de vérifier l'utilisateur" })
         })
-        if (userFound) { }
+        if (userFound) {
+            Articles.create({
+                title: title,
+                content: content,
+                likes: 0,
+            })
+        }
     },
 
     listArticle: function (req, res) {
