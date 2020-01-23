@@ -34,11 +34,11 @@ module.exports = {
         } else if (content == null) {
             return (res.status(400).json({ error: "Le contenu de l'article ne peut être vide" }))
         } else {
-            return (res.status(500).json({ error: "Erreur 500, la page n'existe pas" }))
+            (res.status(500).json({ error: "Erreur 500, la page n'existe pas" }))
         }
         Users.findOne({
             where: { id: userId }
-        })
+        }).then
     },
 
     listArticle: function (req, res) {
