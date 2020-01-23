@@ -38,7 +38,11 @@ module.exports = {
         }
         Users.findOne({
             where: { id: userId }
-        }).then
+        }).then(function (userFound) {
+            res.status(201).json(userFound)
+        }).catch(function (err) {
+            return res.status(500).json({ error: "Impossible de vérifier l'utilisateur" })
+        })
     },
 
     listArticle: function (req, res) {
