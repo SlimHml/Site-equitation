@@ -21,5 +21,7 @@ module.exports = function (router) {
   // Articles routes
 
   router.post("/api/articles/nouvelArticle", articleController.createArticle);
+  router.get("/api/articles/", articleController.listArticles);
+  router.delete("/api/article/", articleController.deleteArticle);
 
 };

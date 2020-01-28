@@ -69,7 +69,7 @@ module.exports = {
         }
     },
 
-    listArticle: function (req, res) {
+    listArticles: function (req, res) {
         // à faire
     },
     deleteArticle: function (req, res) {
