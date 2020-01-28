@@ -37,10 +37,15 @@ module.exports = {
         } else {
             (res.status(500).json({ error: "Erreur 500, la page n'existe pas" }))
         }
+
+
         // Afficher l'utilisateur ainsi que le bon attribut sur l'article
         Users.findOne({
             attributes: ["id", "username"],
-            where: { id: userId }
+            where: {
+                id: userId,
+                username: username
+            }
         }).then(function (userFound) {
             res.status(201).json(userFound)
         }).catch(function (err) {
