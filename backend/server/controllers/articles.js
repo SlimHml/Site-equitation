@@ -18,6 +18,7 @@ module.exports = {
         let userId = jwtUtils.getUserId(headerAutho);
 
         // Params
+        const username = req.body.username;
         const title = req.body.title;
         const content = req.body.content;
 
@@ -26,15 +27,13 @@ module.exports = {
         if (title.length < TITLE_LENGTH) {
             return (res.status(400).json({ error: "Le titre doit comporter au moins 5 lettres" }))
         }
-        if (title == null) {
+        if (title.length == null) {
             return (res.status(400).json({ error: "Il faut un titre à l'article :)" }))
             // Conditions contents
         } else if (content.length < CONTENT_LENGTH) {
             return (res.status(400).json({ error: "Il faut au moins 10 caractères dans l'article" }))
-        } else if (content == null) {
+        } else if (content.length == null) {
             return (res.status(400).json({ error: "Le contenu de l'article ne peut être vide" }))
-        } else {
-            (res.status(500).json({ error: "Erreur 500, la page n'existe pas" }))
         }
 
 
