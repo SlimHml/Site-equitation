@@ -57,7 +57,11 @@ module.exports = {
                 title: title,
                 content: content,
                 likes: 0,
+                userId: userFound.id,
             }).then(function (newArticle) {
+                if (newArticle) {
+                    return res.status(200).json(newArticle);
+                }
 
             }).catch(function (err) {
                 return res.status(500).json({ error: "Utilisateur introuvable" })
