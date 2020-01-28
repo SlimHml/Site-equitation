@@ -13,14 +13,15 @@ const CONTENT_LENGTH = 10;
 
 module.exports = {
     createArticle: function (req, res) {
+        // Obtenir l'authentification
+        let headerAutho = req.headers["authorization"];
+        let userId = jwtUtils.getUserId(headerAutho);
+
         // Params
         const title = req.body.title;
         const content = req.body.content;
         const likes = req.body.likes;
 
-        // Obtenir l'authentification
-        let headerAutho = req.headers["authorization"];
-        let userId = jwtUtils.getUserId(headerAutho);
 
         // Conditions titres
         if (title.length < TITLE_LENGTH) {
