@@ -1,7 +1,7 @@
 // Imports
 const express = require("express");
 const usersController = require("../controllers").users;
-const articleController = require("../controllers").articles;
+const articleController = require("../controllers/articles");
 
 // Routes
 
@@ -21,7 +21,7 @@ module.exports = function (router) {
   // Articles routes
 
   router.post("/api/articles/nouvelArticle", articleController.createArticle);
-  router.get("/api/articles/", articleController.listArticles);
-  router.delete("/api/article/", articleController.deleteArticle);
+  // router.get("/api/articles/", articleController.listArticles);
+  // router.delete("/api/article/", articleController.deleteArticle);
 
 };

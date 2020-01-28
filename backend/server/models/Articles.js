@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     title: DataTypes.STRING,
     content: DataTypes.STRING,
-    likes: DataTypes.INTEGER
+    // likes: DataTypes.INTEGER
   }, {});
   Articles.associate = function (models) {
     // associations can be defined here

@@ -20,7 +20,6 @@ module.exports = {
         // Params
         const title = req.body.title;
         const content = req.body.content;
-        const likes = req.body.likes;
 
 
         // Conditions titres
@@ -51,16 +50,19 @@ module.exports = {
                 Articles.create({
                     title: title,
                     content: content,
-                    likes: 0,
                     userId: userFound.id,
                 }).then(function (newArticle) {
                     if (newArticle) {
                         return res.status(201).json(newArticle);
+                    } else {
+                        return res.status(500).json({ error: "ne peut pas post l'article" })
                     }
-                }).catch(function (err) {
-                    return res.status(500).json({ error: "Ne peut pas créer l'article" })
                 });
+            } else {
+                return res.status(404).json({ error: "Utilisateur non trouvé" })
             }
+        }).catch(function (err) {
+            return res.status(500).json({ error: "Incapable de vérifier l'utilisateur" })
         })
     },
 
