@@ -47,34 +47,40 @@ module.exports = {
                 username: username
             }
         }).then(function (userFound) {
-            res.status(201).json(userFound)
-        }).catch(function (err) {
-            return res.status(500).json({ error: "Impossible de vérifier l'utilisateur" })
+            if (userFound) {
+                Articles.create({
+                    title: title,
+                    content: content,
+                    likes: 0,
+                    userId: userFound.id,
+                }).then(function (newArticle) {
+                    if (newArticle) {
+                        return res.status(201).json(newArticle);
+                    }
+                }).catch(function (err) {
+                    return res.status(500).json({ error: "Ne peut pas créer l'article" })
+                });
+            }
         })
-        // Création de l'article si l'utilisateur est trouvé
-        if (userFound) {
-            Articles.create({
-                title: title,
-                content: content,
-                likes: 0,
-                userId: userFound.id,
-            }).then(function (newArticle) {
-                if (newArticle) {
-                    return res.status(200).json(newArticle);
-                }
-
-            }).catch(function (err) {
-                return res.status(500).json({ error: "Utilisateur introuvable" })
-            })
-        }
     },
 
-    listArticles: function (req, res) {
-        let fields = req.query.fields;
-        let limit = parseInt(req.query.limit);
-        let offset = parseInt(req.query.offset);
-        let order = req.query.order;
+    async listArticles(req, res) {
+        // stockage au cas où let fields = req.query.fields;
+        // stockage au cas où let limit = parseInt(req.query.limit);
+        // stockage au cas où let offset = parseInt(req.query.offset);
+        // stockage au cas où let order = req.query.order;
 
+        let result = await Articles.findAll({
+            include: [{
+                model: Users,
+                attributes: ["username"],
+            }]
+        }).then(function (articles) {
+            return res.status(200).json(articles)
+        }).catch(function (err) {
+            return res.status(500).json({ error: "Impossible de retrouver les articles" })
+        })
+        return result;
     },
     deleteArticle: function (req, res) {
         // à faire
