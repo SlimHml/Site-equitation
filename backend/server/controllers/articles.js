@@ -70,7 +70,11 @@ module.exports = {
     },
 
     listArticles: function (req, res) {
-        // à faire
+        let fields = req.query.fields;
+        let limit = parseInt(req.query.limit);
+        let offset = parseInt(req.query.offset);
+        let order = req.query.order;
+
     },
     deleteArticle: function (req, res) {
         // à faire
