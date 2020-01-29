@@ -39,21 +39,18 @@
 
     <v-content>
       <HelloWorld/>
-      <NavBar/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-import NavBar from './components/NavBar.vue';
+import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
 
   components: {
     HelloWorld,
-    NavBar,
   },
 
   data: () => ({
