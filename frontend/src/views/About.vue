@@ -1,5 +1,18 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <About msg="C'est une à propos page :)" />
+    <img alt="Vue logo" src="../assets/logo.png" />
   </div>
 </template>
+
+<script>
+import About from "@/components/About.vue";
+
+export default {
+  name: "about",
+
+  components: {
+    About
+  }
+};
+</script>
