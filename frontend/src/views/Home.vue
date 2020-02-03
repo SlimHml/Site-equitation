@@ -1,19 +1,16 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Salut" />
     <Todo v-bind:todos="todos" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld";
+// Le V-BIND todos veut dire: Todo(la balise dans template), je souhaite qu'on transmette nos données
 import Todo from "@/components/Todo";
 
 export default {
   name: "home",
   components: {
-    HelloWorld,
     Todo
   },
   data() {
@@ -21,8 +18,8 @@ export default {
       todos: [
         {
           id: 1,
-          title: "Todo 1",
-          completed: false
+          title: "Todo Une ||",
+          completed: true
         }
       ]
     };
